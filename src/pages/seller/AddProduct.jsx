@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { assets, categories } from "../../assets/assets";
+import { useAppContext } from "../../contexts/AppContext";
+import toast from "react-hot-toast";
 
 const AddProduct = () => {
   const [files, setFiles] = useState([]);
@@ -10,8 +12,43 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [offerPrice, setOfferPrice] = useState("");
 
+  const { axios } = useAppContext();
+
   const onSubmitHandler = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+      const productData = {
+        name,
+        description: description.split("\n"),
+        category,
+        price,
+        offerPrice,
+      };
+
+      const formData = new FormData();
+
+      formData.append("productData", JSON.stringify(productData));
+
+      for (let i = 0; i < files.length; i++) {
+        formData.append("images", files[i]);
+      }
+
+      const { data } = await axios.post("/api/product/add", formData);
+
+      if (data.success) {
+        toast.success(data.message);
+        setName("");
+        setDescription("");
+        setCategory("");
+        setPrice("");
+        setOfferPrice("");
+        setFiles([]);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -31,7 +68,7 @@ const AddProduct = () => {
                     <input
                       onChange={(e) => {
                         const updatedFiles = [...files];
-                        updatedFiles[index] = e.target.value;
+                        updatedFiles[index] = e.target.files[0];
                         setFiles(updatedFiles);
                       }}
                       accept="image/*"
@@ -41,7 +78,7 @@ const AddProduct = () => {
                     />
                     <img
                       src={
-                        files[index]
+                        files[index] instanceof File
                           ? URL.createObjectURL(files[index])
                           : assets.upload_area
                       }
