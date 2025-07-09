@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useAppContext } from "../../contexts/AppContext";
-import axios from "axios";
+
 import toast from "react-hot-toast";
 
 const SellerLogin = () => {
-  const { isSeller, setIsSeller, navigate } = useAppContext();
+  const { isSeller, setIsSeller, navigate, axios } = useAppContext();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
