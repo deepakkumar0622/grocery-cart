@@ -112,7 +112,7 @@ server/
 
 * Hashed passwords with bcrypt
 * JWT-based route protection
-* Rate-limiting & CORS policies
+* Rate-limiting
 
 ---
 
