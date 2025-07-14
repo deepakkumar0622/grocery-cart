@@ -32,7 +32,7 @@ This project is a **full-stack grocery web application** built using the **MERN*
 * 💳 **Checkout Process**
 * 📦 **Order Management** (User & Admin)
 * 👨‍🍳 **Admin Panel** for adding/editing/deleting products
-* 📡 **Real-time Updates** using Socket.IO
+* 📡 **Real-time Updates** 
 * 📱 **Responsive Design**
 
 ---
