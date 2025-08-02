@@ -14,7 +14,7 @@ This project is a **full-stack grocery web application** built using the **MERN*
 * Tailwind CSS (or your preferred styling framework)
 * Axios (for API calls)
 * React Router
-* Socket.IO Client
+* Socket IO Client
 
 ### Backend:
 
